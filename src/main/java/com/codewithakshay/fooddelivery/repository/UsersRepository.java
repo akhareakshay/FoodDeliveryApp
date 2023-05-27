@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.codewithakshay.fooddelivery.entity.Users;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<Users, Long> {
 
 }
