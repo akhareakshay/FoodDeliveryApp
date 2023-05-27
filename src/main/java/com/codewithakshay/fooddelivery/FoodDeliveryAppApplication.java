@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FoodDeliveryAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FoodDeliveryAppApplication.class, args);
+		try {
+			SpringApplication.run(FoodDeliveryAppApplication.class, args);
+		} catch (Exception e) {
+			System.out.println("exception occured : " + e);
+		}
 	}
 
 }
