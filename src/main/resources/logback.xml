@@ -1,0 +1,28 @@
+<configuration>
+
+	<appender name="ROLLIN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<file>/opt/tomcat/logs/fooddelivery.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/opt/tomcat/logs/fooddelivery_%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} %L - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.codewithakshay.fooddelivery" level="ERROR" />
+
+	<root level="ERROR">
+		<appender-ref ref="ROLLIN" />
+	</root>
+</configuration>
