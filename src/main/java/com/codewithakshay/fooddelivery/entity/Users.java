@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -29,8 +28,8 @@ public class Users {
 	private String email;
 	@NotBlank(message = "Password is Mandatory")
 	private String password;
-	@NotNull(message = "Phone is Mandatory")
-	private long phone;
+	@NotBlank(message = "Phone is Mandatory")
+	private String phone;
 	@NotBlank(message = "Address is Mandatory")
 	private String address;
 	@Column(name = "last_login")
