@@ -24,13 +24,13 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public List<Users> searchUsers(Users users) {
 		List<Users> usersList;
-		if (users.getName() != null && users.getEmail() != null && users.getPassword() != null && users.getPhone() != 0
-				&& users.getAddress() != null)
+		if (users.getName() != null && users.getEmail() != null && users.getPassword() != null
+				&& users.getPhone() != null && users.getAddress() != null)
 			usersList = usersRepository.findByNameAndEmailAndPasswordAndPhoneAndAddress(users.getName(),
 					users.getEmail(), users.getPassword(), users.getPhone(), users.getAddress());
 		else if (users.getName() != null && users.getAddress() != null)
 			usersList = usersRepository.findByNameAndAddress(users.getName(), users.getAddress());
-		else if (users.getName() != null && users.getPhone() != 0)
+		else if (users.getName() != null && users.getPhone() != null)
 			usersList = usersRepository.findByNameAndPhone(users.getName(), users.getPhone());
 		else if (users.getEmail() != null && users.getPassword() != null)
 			usersList = usersRepository.findByEmailAndPassword(users.getEmail(), users.getPassword());
@@ -38,7 +38,7 @@ public class UsersServiceImpl implements UsersService {
 			usersList = usersRepository.findByNameAndEmail(users.getName(), users.getEmail());
 		else if (users.getAddress() != null)
 			usersList = usersRepository.findByAddress(users.getAddress());
-		else if (users.getPhone() != 0)
+		else if (users.getPhone() != null)
 			usersList = usersRepository.findByPhone(users.getPhone());
 		else if (users.getPassword() != null)
 			usersList = usersRepository.findByPassword(users.getPassword());
