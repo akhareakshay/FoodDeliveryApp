@@ -29,10 +29,10 @@ public class Restaurant {
 	private String name;
 	@NotBlank(message = "Owner or Manager Name is Mandatory")
 	@Column(name = "owner_manager")
-	private String ownerOrManager;
-	@NotNull(message = "Contact Number is Mandatory")
+	private String ownerManager;
+	@NotBlank(message = "Contact Number is Mandatory")
 	@Column(name = "contact_number")
-	private long contactNumber;
+	private String contactNumber;
 	@NotBlank(message = "Email is Mandatory")
 	private String email;
 	@NotBlank(message = "Address is Mandatory")
@@ -42,7 +42,8 @@ public class Restaurant {
 	private String cuisineType;
 	@NotBlank(message = "Opening Hours are Mandatory")
 	@Column(name = "opening_hours")
-	private TimeRange openingHours;
+	private String openingHours;
+//	private TimeRange openingHours;
 	@NotNull(message = "Delivery Radius is Mandatory")
 	@Column(name = "delivery_radius")
 	private double deliveryRadius;
