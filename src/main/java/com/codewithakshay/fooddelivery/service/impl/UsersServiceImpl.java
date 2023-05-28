@@ -3,11 +3,13 @@ package com.codewithakshay.fooddelivery.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.codewithakshay.fooddelivery.entity.Users;
 import com.codewithakshay.fooddelivery.repository.UsersRepository;
 import com.codewithakshay.fooddelivery.service.UsersService;
 
+@Service
 public class UsersServiceImpl implements UsersService {
 
 	@Autowired
