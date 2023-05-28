@@ -104,4 +104,15 @@ public class UsersController {
 		}
 	}
 
+	@PostMapping("/delete")
+	public ResponseEntity<Object> deleteUserById(@RequestBody Users users) {
+		try {
+			usersRepository.deleteById(users.getUserId());
+			return new ResponseEntity<>("User Deleted Successfully", HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Exception while deleting user ", e);
+			return foodDeliveryErrorResponse.setExceptionResponse(e);
+		}
+	}
+
 }
