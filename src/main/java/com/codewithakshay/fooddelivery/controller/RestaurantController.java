@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codewithakshay.fooddelivery.entity.Restaurant;
-import com.codewithakshay.fooddelivery.entity.Restaurant;
 import com.codewithakshay.fooddelivery.entity.ValidList;
 import com.codewithakshay.fooddelivery.repository.RestaurantRepository;
+import com.codewithakshay.fooddelivery.service.RestaurantService;
 import com.codewithakshay.fooddelivery.util.FoodDeliveryErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +33,9 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantRepository restaurantRepository;
+
+	@Autowired
+	private RestaurantService restaurantService;
 
 	@PostMapping(value = "/saveorupdate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveOrUpdateRestaurant(@Valid @RequestBody Restaurant restaurant,
@@ -92,11 +95,11 @@ public class RestaurantController {
 		try {
 			restaurantDataList = restaurantService.searchRestaurant(restaurant);
 			if (!restaurantDataList.isEmpty())
-				return new ResponseEntity<>(RestaurantDataList, HttpStatus.OK);
+				return new ResponseEntity<>(restaurantDataList, HttpStatus.OK);
 			else
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
-			log.error("Exceptio while searching Restaurant ", e);
+			log.error("Exception while searching Restaurant ", e);
 			return foodDeliveryErrorResponse.setExceptionResponse(e);
 		}
 	}
