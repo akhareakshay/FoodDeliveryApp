@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codewithakshay.fooddelivery.entity.Users;
 import com.codewithakshay.fooddelivery.entity.ValidList;
 import com.codewithakshay.fooddelivery.repository.UsersRepository;
+import com.codewithakshay.fooddelivery.service.UsersService;
 import com.codewithakshay.fooddelivery.util.FoodDeliveryErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,10 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 public class UsersController {
 
 	@Autowired
+	private FoodDeliveryErrorResponse foodDeliveryErrorResponse;
+
+	@Autowired
 	private UsersRepository usersRepository;
 
 	@Autowired
-	private FoodDeliveryErrorResponse foodDeliveryErrorResponse;
+	private UsersService usersService;
 
 	@PostMapping(value = "/saveorupdate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveOrUpdateUser(@Valid @RequestBody Users users, BindingResult bindingResult) {
@@ -81,6 +85,21 @@ public class UsersController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			log.error("Exception while getting list of users ", e);
+			return foodDeliveryErrorResponse.setExceptionResponse(e);
+		}
+	}
+
+	@PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> searchUsers(@RequestBody Users users) {
+		List<Users> usersDataList;
+		try {
+			usersDataList = usersService.searchUsers(users);
+			if (!usersDataList.isEmpty())
+				return new ResponseEntity<>(usersDataList, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			log.error("Exceptio while searching users ", e);
 			return foodDeliveryErrorResponse.setExceptionResponse(e);
 		}
 	}
